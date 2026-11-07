@@ -4,8 +4,8 @@ default:
     @just --list
 
 setup:
-    pnpm install
-    uv sync
+    pnpm install --frozen-lockfile
+    uv sync --locked
 
 dev-api:
     uv run uvicorn range_api.main:app --reload --port 8000
@@ -63,9 +63,7 @@ knip:
     pnpm exec knip
 
 test-web:
-    pnpm --filter @range/web test
-    pnpm --filter @range/ui test
-    pnpm --filter @range/landing test
+    pnpm exec vitest run
 
 test-py:
     uv run pytest

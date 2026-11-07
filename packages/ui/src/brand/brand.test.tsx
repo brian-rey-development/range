@@ -1,12 +1,13 @@
 import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { join } from "node:path";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { RangeLogo, RangeMark, RangeWordmark } from "../index";
 import { MARK_PATH, WORDMARK_PATH } from "./brand-paths";
 
-const asset = (name: string) => readFileSync(resolve("brand", name), "utf8");
+const asset = (name: string) =>
+  readFileSync(join(import.meta.dirname, "../../brand", name), "utf8");
 
 describe("brand components", () => {
   it("name themselves Range and carry no tagline", () => {
