@@ -1,0 +1,25 @@
+pre-commit:
+  parallel: true
+  commands:
+    ts-lint:
+      glob: "*.{ts,tsx}"
+      run: pnpm exec oxlint {staged_files}
+    ts-format:
+      glob: "*.{ts,tsx,css,json}"
+      run: pnpm exec oxfmt --check {staged_files}
+    py-lint:
+      glob: "*.py"
+      run: uv run ruff check {staged_files}
+    py-format:
+      glob: "*.py"
+      run: uv run ruff format --check {staged_files}
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm exec commitlint --edit {1}
+
+pre-push:
+  commands:
+    check:
+      run: just check

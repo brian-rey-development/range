@@ -1,0 +1,19 @@
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+.astro/

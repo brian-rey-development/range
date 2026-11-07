@@ -1,0 +1,43 @@
+ls:
+  apps/web/src:
+    .dir: kebab-case
+    .ts: kebab-case
+    .tsx: kebab-case
+    .css: kebab-case
+    .module.css: kebab-case
+    .route.tsx: regex:^$
+    .config.ts: regex:^$
+    .types.ts: regex:^$
+    .utils.ts: regex:^$
+  apps/landing/src:
+    .dir: kebab-case
+    .ts: kebab-case
+    .tsx: kebab-case
+    .astro: kebab-case
+    .css: kebab-case
+  packages/ui/src:
+    .dir: kebab-case
+    .ts: kebab-case
+    .tsx: kebab-case
+    .css: kebab-case
+    .png: kebab-case
+  packages/api-client/src:
+    .ts: kebab-case
+    .d.ts: kebab-case
+  apps/api/src: &python
+    .dir: snake_case
+    .py: snake_case | regex:__[a-z]+__
+  apps/api/tests:
+    .py: snake_case
+  apps/worker/src: *python
+  packages/engine/src: *python
+  packages/core/src: *python
+  packages/infrastructure/src: *python
+  packages/ai/src: *python
+
+ignore:
+  - node_modules
+  - .venv
+  - .git
+  - dist
+  - __pycache__

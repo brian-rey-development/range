@@ -1,0 +1,112 @@
+[project]
+name = "range-workspace"
+version = "0.0.0"
+requires-python = ">=3.13"
+dependencies = [
+  "range-api",
+  "range-worker",
+  "range-engine",
+  "range-core",
+  "range-infrastructure",
+  "range-ai",
+]
+
+[dependency-groups]
+dev = ["hypothesis", "httpx2", "import-linter", "pytest", "ruff", "ty"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+  "apps/api",
+  "apps/worker",
+  "packages/engine",
+  "packages/core",
+  "packages/infrastructure",
+  "packages/ai",
+]
+
+[tool.uv.sources]
+range-api = { workspace = true }
+range-worker = { workspace = true }
+range-engine = { workspace = true }
+range-core = { workspace = true }
+range-infrastructure = { workspace = true }
+range-ai = { workspace = true }
+
+[tool.pytest.ini_options]
+testpaths = ["apps", "packages"]
+addopts = ["--import-mode=importlib", "-q"]
+
+[tool.ty.environment]
+python-version = "3.13"
+
+[tool.ty.src]
+include = ["apps", "packages"]
+
+[tool.importlinter]
+root_packages = [
+  "range_api",
+  "range_worker",
+  "range_infrastructure",
+  "range_ai",
+  "range_core",
+  "range_engine",
+]
+
+[[tool.importlinter.contracts]]
+name = "Packages depend in one direction"
+type = "layers"
+layers = [
+  "range_api | range_worker",
+  "range_infrastructure",
+  "range_ai",
+  "range_core",
+  "range_engine",
+]
+
+[[tool.importlinter.contracts]]
+name = "Core contexts are independent of each other"
+type = "independence"
+modules = [
+  "range_core.play",
+  "range_core.coaching",
+  "range_core.learning",
+  "range_core.memory",
+  "range_core.history",
+]
+
+[[tool.importlinter.contracts]]
+name = "Core shared kernel sits below the contexts"
+type = "layers"
+layers = [
+  "range_core.play | range_core.coaching | range_core.learning | range_core.memory | range_core.history",
+  "range_core.shared",
+]
+
+[[tool.importlinter.contracts]]
+name = "Each core context points inward"
+type = "layers"
+layers = ["application", "domain"]
+containers = [
+  "range_core.play",
+  "range_core.coaching",
+  "range_core.learning",
+  "range_core.memory",
+  "range_core.history",
+]
+
+[[tool.importlinter.contracts]]
+name = "The AI runtime knows nothing of Range"
+type = "forbidden"
+source_modules = ["range_ai.runtime"]
+forbidden_modules = [
+  "range_core",
+  "range_engine",
+  "range_infrastructure",
+  "range_api",
+  "range_worker",
+  "range_ai.agents",
+  "range_ai.evals",
+]
