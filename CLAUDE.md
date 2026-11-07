@@ -1,6 +1,6 @@
 # Range
 
-A poker thinking coach and a platform for learning how agent systems work. Read `docs/ARCHITECTURE.md` before changing structure.
+A poker thinking coach and a platform for learning how agent systems work. Read `docs/technical/ARCHITECTURE.md` before changing structure.
 
 ## Commands
 

@@ -2,7 +2,7 @@
 
 Range teaches a beginner to think about poker from first principles, and it doubles as a platform for learning how production agent systems are built.
 
-The architecture, decisions and roadmap live in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+The architecture and decisions live in [docs/technical/ARCHITECTURE.md](docs/technical/ARCHITECTURE.md), and the roadmap lives in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Prerequisites
 

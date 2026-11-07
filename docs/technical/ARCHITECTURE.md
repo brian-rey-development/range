@@ -326,15 +326,13 @@ Four records in `docs/technical/adrs/` cover the decisions that are expensive to
 
 ## Roadmap
 
-Work proceeds in three steps so that parallel lanes never wait on an undefined interface.
+Work proceeds in short iterations, and `docs/ROADMAP.md` orders them. Each iteration states one question, designs only the interfaces that it touches, builds the smallest working version and measures it, so the design changes when the evidence says so. Decisions that are expensive to reverse, such as the event store and the visibility model, are settled early in decision records. Cheap decisions, such as tool names and prompts, emerge while building.
 
-1. **Freeze the contracts.** One sequential lane defines the engine types, the event envelope and visibility model, the core ports, the runtime tool interface and gateway port, and the first API schema. Nothing else starts until these are reviewed.
-2. **Build one thin vertical slice.** A user plays a heads-up table against one bot, events land in the store, a coach with three tools streams advice, and the web app renders it over SSE with reconnect. The slice proves every layer before the work fans out.
-3. **Fan out into parallel lanes**, each in its own git worktree.
+The first iterations follow the learner path. One engine-graded scenario comes first, then a coach with no tools that the learner can ask at any moment, then the engine tools that make its numbers correct and citable. A structured program and learner memory follow. Full hands against bots arrive after that, and they bring the event store and the visibility model, which the decision records already describe. Model-driven players and parallel tables come last. Each step proves a layer before the work fans out into parallel lanes, each in its own git worktree. The lanes below show where the work divides and what each one needs from the others.
 
 | Lane | Delivers | Depends on |
 | --- | --- | --- |
-| Engine | Evaluator, Range, equity, odds, EV, rule bots, golden and property tests | Frozen types |
+| Engine | Evaluator, Range, equity, odds, EV, rule bots, golden and property tests | Engine types from the first scenarios |
 | Events and tables | Event store, outbox, scoped readers, table runner | Engine types, event schema |
 | Agent runtime | Gateway, loop, context builder, tool registry, tracing | Tool interface, gateway port |
 | Players | LLM personas and policy adapters | Engine, tables |
@@ -345,7 +343,7 @@ Work proceeds in three steps so that parallel lanes never wait on an undefined i
 
 ## Risks and open questions
 
-- **Building a platform before a product.** This is the largest risk, and the thin vertical slice is the defense. Each lane must show up in the slice or wait.
+- **Building a platform before a product.** This is the largest risk, and building the learner path first, one working step at a time, is the defense. Each lane must show up in an earlier step or wait.
 - **Embeddings provider.** Anthropic has none, so the choice is a hosted provider or a local model, decided when the memory lane starts.
 - **LiteLLM coverage.** The first spike must confirm it supports the current model ids, prompt caching, thinking blocks and structured outputs. If it lags, the native adapter carries those calls, which is why the port exists.
 - **Library choice.** PokerKit versus eval7 versus both is settled by a spike measuring correctness and equity speed.
