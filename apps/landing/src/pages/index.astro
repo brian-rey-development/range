@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/base-layout.astro";
+import { CoachSection } from "../sections/coach/coach-section";
+import { SiteFooter } from "../sections/footer/site-footer";
+import { SiteHeader } from "../sections/header/site-header";
+import { HeroSection } from "../sections/hero/hero-section";
+import { PrinciplesSection } from "../sections/principles/principles-section";
+import { StrategySection } from "../sections/strategy/strategy-section";
+---
+
+<BaseLayout>
+  <SiteHeader client:load />
+  <main id="main">
+    <HeroSection />
+    <CoachSection />
+    <StrategySection client:visible />
+    <PrinciplesSection />
+  </main>
+  <SiteFooter />
+</BaseLayout>
