@@ -1,0 +1,9 @@
+{
+  "ignoreWorkspaces": ["."],
+  "workspaces": {
+    "apps/web": { "project": ["src/**/*.{ts,tsx,css}"] },
+    "apps/landing": { "project": ["src/**/*.{ts,tsx,astro,css}"] },
+    "packages/ui": { "project": ["src/**/*.{ts,tsx,css}"] }
+  },
+  "compilers": { "css": true }
+}

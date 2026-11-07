@@ -1,4 +1,0 @@
-{
-  "project": ["src/**/*.{ts,tsx,astro,css}"],
-  "compilers": { "css": true }
-}

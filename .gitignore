@@ -5,15 +5,20 @@ __pycache__/
 .ruff_cache/
 .pytest_cache/
 .hypothesis/
+.import_linter_cache/
+.coverage
+htmlcov/
 dist/
 coverage/
 .vite/
+.astro/
+.pnpm-store/
 *.tsbuildinfo
+*.log
 .env
 .env.*
 !.env.example
 .DS_Store
 
-# graft's local graph cache — regenerable, not committed (run `graft build`).
-/graft/
-.astro/
+# graft's local graph cache, regenerable and not committed (run `graft build`).
+graft/

@@ -28,7 +28,6 @@ jobs:
       - uses: extractions/setup-just@v3
       - run: just setup
       - run: just check
-      - run: just contracts-check
 
   audit:
     runs-on: ubuntu-latest

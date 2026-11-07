@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | Accepted |
+| Status | Accepted, with the generated contract suspended on 2026-11-07 |
 | Date | 2026-11-07 |
 | Origin | Owner decision |
 | Related | ADR-0003 |
@@ -18,6 +18,8 @@ The web app and the API also use two languages, so a hand-written client drifts 
 - Put every poker rule and formula in the Python package `packages/engine` so the web app does no poker math and gets results from the API.
 - The Pydantic models in `apps/api` produce the OpenAPI schema, and `openapi-typescript` turns the schema into `packages/api-client`.
 - The web app calls the backend only through the generated package, and CI regenerates the client and fails on any difference.
+
+Suspension. The owner removed `packages/api-client`, `openapi-typescript`, `openapi-fetch`, the `contracts` recipes and the CI drift check, because no web code called the backend yet and the generated package held only a stub. The first decision about one engine still holds. The generated contract returns, as originally decided, when the web app makes its first backend call.
 
 ## Consequences
 

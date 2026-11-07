@@ -46,5 +46,5 @@
       "rules": { "max-lines-per-function": "off", "no-magic-numbers": "off" }
     }
   ],
-  "ignorePatterns": ["**/dist/**", "**/node_modules/**", "**/schema.d.ts", ".venv/**"]
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**", ".venv/**"]
 }

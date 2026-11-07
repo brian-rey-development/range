@@ -11,7 +11,7 @@ This document records the decisions made so far, the structure that follows from
 3. **Domain events and agent traces are different things.** Domain events are durable facts with stable schemas. Traces are high volume, short lived and may contain personal data, so they live in a separate store and link back by id.
 4. **Each agent sees only its own view.** The engine builds that view and the storage layer enforces it, because a prompt is a request while a projection is a guarantee.
 5. **Ports belong to their consumer.** The domain defines the interfaces it needs, and outer layers implement them, so the domain never learns that LLMs, Postgres or Redis exist.
-6. **Contracts have one source.** Pydantic models generate the OpenAPI schema, which generates the TypeScript client, and CI fails when they drift.
+6. **Contracts have one source.** Pydantic models in `apps/api` define the API schemas, and a typed web client generated from the OpenAPI schema they produce is added when the frontend makes its first backend call.
 7. **Feedback stays fast.** Lint, types and boundary checks finish in seconds on both languages, because slow checks get skipped.
 
 ## Quality attributes
@@ -97,7 +97,6 @@ range/
       runtime/        gateway, loop, tools, context, budget, tracing
       agents/         coach, analysts, LLM players
       evals/          scenario sets and scorers
-    api-client/       generated TypeScript client, never edited by hand
     ui/               design system as @range/ui, with tokens, primitives and poker components
   infra/              docker compose for Postgres and Redis
   docs/               architecture, decision records, learning map
@@ -109,7 +108,7 @@ Dependencies run `apps` to `infrastructure` to `core` to `engine`. `infrastructu
 Rules, enforced by import-linter in CI.
 
 - `engine` imports no other Range package and no web, database or vendor library beyond the one poker library it wraps.
-- `core` imports `engine` only. It never imports `ai`, `infrastructure` or `apps`.
+- `core` imports `engine` only among Range packages. It never imports `ai`, `infrastructure` or `apps`, and its only third-party library is `pydantic`, which validates entities.
 - The context folders inside `core` are independent of each other. They share engine types and a small shared folder holding the event envelope and ids.
 - `infrastructure` implements the ports defined in `core` and owns every SQLAlchemy model, repository and client.
 - `ai/runtime` imports nothing of ours.
@@ -278,15 +277,14 @@ Each table runs as an asyncio task group inside a worker, with its seed stored i
 
 ## Apps
 
-`apps/api` contains routers, API schemas and a composition root, and nothing else. `apps/worker` contains Taskiq jobs, table runners and its own composition root, and it deploys and scales separately because simulations and equity work are long running and CPU heavy while the API serves latency-sensitive requests. API schemas are separate from core entities and are the source of the generated client. The live stream event union is registered as an OpenAPI component so the client types it.
+`apps/api` contains routers, API schemas and a composition root, and nothing else. `apps/worker` contains Taskiq jobs, table runners and its own composition root, and it deploys and scales separately because simulations and equity work are long running and CPU heavy while the API serves latency-sensitive requests. API schemas are separate from core entities, so the public contract can change without touching them. The live stream event union is registered as an OpenAPI component so a future client can type it.
 
 `apps/web` keeps the convention already installed for it, with `app`, `core`, `shared` and `modules`, and route files that only compose a module's page.
 
-- `core` holds configuration and wrappers for libraries such as the router and the generated client.
+- `core` holds configuration and wrappers for libraries such as the router.
 - `shared` holds utils that belong to no module. The design system lives in `packages/ui`.
 - Modules are `table`, `coach`, `history`, `lessons`, `learner` and `agent-lab`, each split into `types`, `application`, `infrastructure`, `hooks` and `ui`. The `agent-lab` module shows runs, traces and parallel tables, because watching agents work is half the point.
 - There is no poker domain layer, since rules and math live in the engine. The client holds presentation state only.
-- The browser reaches the backend only through `packages/api-client`.
 
 ## Design system and landing page
 
@@ -310,13 +308,13 @@ The design system moved out of `apps/web` into `packages/ui` as `@range/ui` once
 | Boundaries | dependency-cruiser | import-linter |
 | Tests | Vitest | pytest and hypothesis |
 | Naming | ls-lint, run once at the root for both languages | |
-| Hooks and commits | lefthook and commitlint at the root | |
+| Hooks and commits | lefthook at the root, with a regex check for Conventional Commits | |
 | Settings and logs | | pydantic-settings reads `RANGE_*` variables and fails at startup with the variable names. OpenTelemetry starts a span per request and reads the W3C `traceparent` header, and structlog writes JSON lines that carry its `trace_id`. |
 | Dependency updates | Dependabot opens weekly grouped pull requests with a seven day cooldown, and `just audit` runs `pnpm audit` and `uv audit` in CI. | |
 
-`just check` fans out lint, types, boundaries, naming, tests and a static build of the landing page across both languages in parallel. CI runs the same command with path filters and adds a step that regenerates the API client and fails on any diff. Agent tests use a scripted fake gateway for loop logic and recorded provider responses for contract tests, so the suite never depends on a live model. Paid eval runs are a separate, explicitly triggered job.
+`just check` fans out lint, types, boundaries, naming, tests and a static build of the landing page across both languages in parallel. CI runs the same command with path filters. Agent tests use a scripted fake gateway for loop logic and recorded provider responses for contract tests, so the suite never depends on a live model. Paid eval runs are a separate, explicitly triggered job.
 
-TypeScript 7 runs `tsc`, but its native compiler does not expose the old JavaScript compiler API yet. dependency-cruiser, openapi-typescript and `astro check` need that API, so the first two use a tooling-only TypeScript 6.0.3 pinned at the repository root, and the landing app skips `astro check` and is checked with `tsc` instead. All three are revisited when their releases support 7.
+TypeScript 7 runs `tsc`, but its native compiler does not expose the old JavaScript compiler API yet. dependency-cruiser, knip and `astro check` need that API, so the first two use a tooling-only TypeScript 6.0.3 pinned at the repository root, and the landing app skips `astro check` and is checked with `tsc` instead. All three are revisited when their releases support 7.
 
 ## Evals
 
@@ -342,7 +340,7 @@ Work proceeds in three steps so that parallel lanes never wait on an undefined i
 | Players | LLM personas and policy adapters | Engine, tables |
 | Memory | Stores, retrieval, consolidation | Event store, core ports |
 | Coach and analysts | Agents, tools, post-hand review | Agent runtime, memory, engine |
-| Web | Design system, table, coach and lesson views | Generated client |
+| Web | Design system, table, coach and lesson views | API schemas |
 | Evals and observability | Scenario sets, scorers, trace views | Event store, agent runtime |
 
 ## Risks and open questions

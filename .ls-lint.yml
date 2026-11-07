@@ -21,9 +21,6 @@ ls:
     .tsx: kebab-case
     .css: kebab-case
     .png: kebab-case
-  packages/api-client/src:
-    .ts: kebab-case
-    .d.ts: kebab-case
   apps/api/src: &python
     .dir: snake_case
     .py: snake_case | regex:__[a-z]+__

@@ -34,6 +34,5 @@ packages/
   core/             product entities, use cases and ports
   infrastructure/   database, event store, Redis, telemetry, adapters
   ai/               agent runtime, agents and evals
-  api-client/       generated TypeScript client
   ui/               design system, tokens, primitives and poker components
 ```

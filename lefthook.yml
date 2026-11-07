@@ -16,8 +16,12 @@ pre-commit:
 
 commit-msg:
   commands:
-    commitlint:
-      run: pnpm exec commitlint --edit {1}
+    conventional-commit:
+      run: |
+        head -n 1 {1} | grep -qE '^(Merge |Revert |fixup! |(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9._/-]+\))?!?: .{1,100}$)' || {
+          echo "Commit message must follow Conventional Commits, for example: feat(ui): add button" >&2
+          exit 1
+        }
 
 pre-push:
   commands:

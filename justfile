@@ -33,8 +33,8 @@ audit:
 check: lint-web lint-py typecheck-web typecheck-py boundaries-web boundaries-py naming knip test-web test-py build-landing
 
 lint-web:
-    pnpm exec oxlint apps/web apps/landing packages/api-client packages/ui
-    pnpm exec oxfmt --check apps/web apps/landing packages/api-client packages/ui
+    pnpm exec oxlint apps/web apps/landing packages/ui
+    pnpm exec oxfmt --check apps/web apps/landing packages/ui
 
 lint-py:
     uv run ruff check
@@ -42,7 +42,6 @@ lint-py:
 
 typecheck-web:
     pnpm --filter @range/web typecheck
-    pnpm --filter @range/api-client typecheck
     pnpm --filter @range/ui typecheck
     pnpm --filter @range/landing typecheck
 
@@ -61,9 +60,7 @@ naming:
     pnpm exec ls-lint
 
 knip:
-    pnpm --filter @range/web knip
-    pnpm --filter @range/ui knip
-    pnpm --filter @range/landing knip
+    pnpm exec knip
 
 test-web:
     pnpm --filter @range/web test
@@ -74,14 +71,7 @@ test-py:
     uv run pytest
 
 fix:
-    pnpm exec oxlint --fix apps/web apps/landing packages/api-client packages/ui
-    pnpm exec oxfmt apps/web apps/landing packages/api-client packages/ui
+    pnpm exec oxlint --fix apps/web apps/landing packages/ui
+    pnpm exec oxfmt apps/web apps/landing packages/ui
     uv run ruff check --fix
     uv run ruff format
-
-contracts:
-    uv run python -m range_api.openapi > packages/api-client/openapi.json
-    pnpm exec openapi-typescript packages/api-client/openapi.json -o packages/api-client/src/schema.d.ts
-
-contracts-check: contracts
-    git diff --exit-code -- packages/api-client
