@@ -42,6 +42,17 @@
   --color-grade-blunder: #8a2523;
   --color-gain: #17715f;
   --color-loss: var(--color-accent-text);
+  --color-verdict-best: #1b8a74;
+  --color-verdict-close: #5e8f2e;
+  --color-verdict-mistake: #dd5f22;
+  --color-verdict-costly: #8a2523;
+  --color-heuristic: #8a5a00;
+  --color-heuristic-soft: #fbf0dc;
+  --color-chart-1: #4a5260;
+  --color-chart-2: #24978a;
+  --color-chart-3: #ea5a5b;
+  --color-chart-4: #b37f16;
+  --color-chart-5: #7d8796;
 
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -128,6 +139,14 @@
   --shadow-key: 0 1px 0 var(--color-line-strong);
   --shadow-card-lifted: var(--shadow-card), var(--shadow-focus);
 
+  --animate-ring-pulse: ring-pulse 1.4s ease-in-out infinite;
+
+  @keyframes ring-pulse {
+    50% {
+      opacity: 0.9;
+    }
+  }
+
   --default-transition-duration: 120ms;
   --default-transition-timing-function: ease;
 }
@@ -168,6 +187,17 @@
   --color-grade-mistake: #f08250;
   --color-grade-blunder: #e65a57;
   --color-gain: #5cc9b4;
+  --color-verdict-best: #3fb6a8;
+  --color-verdict-close: #8cbf5a;
+  --color-verdict-mistake: #f08250;
+  --color-verdict-costly: #e65a57;
+  --color-heuristic: #e2b04f;
+  --color-heuristic-soft: #35290f;
+  --color-chart-1: #c9ced6;
+  --color-chart-2: #46bcae;
+  --color-chart-3: #ec6464;
+  --color-chart-4: #e2b04f;
+  --color-chart-5: #7d8796;
   --shadow-card: 0 1px 1px rgb(0 0 0 / 0.5), 0 2px 6px rgb(0 0 0 / 0.4);
   --shadow-pop: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 32px rgb(0 0 0 / 0.5);
 }

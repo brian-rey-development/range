@@ -1,13 +1,22 @@
 export { RangeLogo } from "./brand/range-logo";
 export { RangeMark } from "./brand/range-mark";
 export { RangeWordmark } from "./brand/range-wordmark";
+export { Avatar, type AvatarKind } from "./primitives/avatar";
 export { Button } from "./primitives/button";
 export { ButtonLink } from "./primitives/button-link";
 export { Heading } from "./primitives/heading";
+export { Icon } from "./primitives/icon";
+export { IconButton } from "./primitives/icon-button";
+export type { IconName } from "./primitives/icon-paths";
 export { Input } from "./primitives/input";
 export { Kbd } from "./primitives/kbd";
 export { SegmentedControl } from "./primitives/segmented-control";
+export { Slider } from "./primitives/slider";
 export { Stat } from "./primitives/stat";
+export { Switch } from "./primitives/switch";
 export { Tabs } from "./primitives/tabs";
+export { Tag } from "./primitives/tag";
+export { Term } from "./primitives/term";
+export { Tooltip } from "./primitives/tooltip";
 
 export * from "./poker";

@@ -18,6 +18,7 @@ type SegmentedControlProps<V extends string> = {
   readonly defaultValue?: V;
   readonly onChange?: (value: V) => void;
   readonly size?: Size;
+  readonly block?: boolean;
   readonly className?: string;
 };
 
@@ -57,6 +58,7 @@ export function SegmentedControl<V extends string>({
   options,
   label,
   size = "md",
+  block,
   className,
   ...selection
 }: SegmentedControlProps<V>) {
@@ -68,7 +70,7 @@ export function SegmentedControl<V extends string>({
       role="radiogroup"
       aria-label={label}
       onKeyDown={onKeyDown}
-      className={cx(TRACK, className)}
+      className={cx(TRACK, block && "flex self-stretch", className)}
     >
       {options.map((option) => (
         <Segment

@@ -44,6 +44,10 @@
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
       "rules": { "max-lines-per-function": "off", "no-magic-numbers": "off" }
+    },
+    {
+      "files": ["**/icon-paths.ts"],
+      "rules": { "no-magic-numbers": "off" }
     }
   ],
   "ignorePatterns": ["**/dist/**", "**/node_modules/**", ".venv/**"]

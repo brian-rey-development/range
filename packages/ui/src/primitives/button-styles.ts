@@ -20,11 +20,17 @@ const SIZE: Record<ButtonSize, string> = {
 };
 
 type ButtonLook = {
+  readonly block?: boolean | undefined;
   readonly variant?: ButtonVariant | undefined;
   readonly size?: ButtonSize | undefined;
   readonly className?: string | undefined;
 };
 
-export function buttonClass({ variant = "secondary", size = "md", className }: ButtonLook): string {
-  return cx(BASE, VARIANT[variant], SIZE[size], className);
+export function buttonClass({
+  variant = "secondary",
+  size = "md",
+  block,
+  className,
+}: ButtonLook): string {
+  return cx(BASE, VARIANT[variant], SIZE[size], block && "w-full", className);
 }
