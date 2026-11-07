@@ -12,6 +12,7 @@ Node 24, pnpm 12, uv, just and Docker.
 
 ```
 just setup
+cp .env.example .env
 just up
 just dev-api
 just dev-web

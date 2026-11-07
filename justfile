@@ -25,6 +25,10 @@ up:
 down:
     docker compose -f infra/docker-compose.yml down
 
+audit:
+    pnpm audit --audit-level high
+    uv audit --preview-features audit-command
+
 [parallel]
 check: lint-web lint-py typecheck-web typecheck-py boundaries-web boundaries-py naming knip test-web test-py build-landing
 

@@ -2,7 +2,16 @@
 name = "range-infrastructure"
 version = "0.0.0"
 requires-python = ">=3.13"
-dependencies = ["range-ai", "range-core", "range-engine"]
+dependencies = [
+    "opentelemetry-api>=1.45.2",
+    "opentelemetry-sdk>=1.45.2",
+    "pydantic>=2.14.3",
+    "pydantic-settings>=2.16.2",
+    "range-ai",
+    "range-core",
+    "range-engine",
+    "structlog>=26.1.0",
+]
 
 [build-system]
 requires = ["hatchling"]

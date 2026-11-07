@@ -2,7 +2,14 @@
 name = "range-api"
 version = "0.0.0"
 requires-python = ">=3.13"
-dependencies = ["fastapi", "pydantic", "uvicorn", "range-core", "range-infrastructure"]
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "uvicorn",
+    "range-core",
+    "range-infrastructure",
+    "opentelemetry-instrumentation-fastapi>=0.66b2",
+]
 
 [build-system]
 requires = ["hatchling"]

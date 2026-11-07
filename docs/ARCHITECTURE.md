@@ -92,7 +92,7 @@ range/
   packages/
     engine/           everything poker needs, pure
     core/             product entities, use cases and ports, one folder per context
-    infrastructure/   database, event store, outbox, redis, telemetry, port adapters
+    infrastructure/   config, database, event store, outbox, redis, telemetry, port adapters
     ai/
       runtime/        gateway, loop, tools, context, budget, tracing
       agents/         coach, analysts, LLM players
@@ -311,6 +311,8 @@ The design system moved out of `apps/web` into `packages/ui` as `@range/ui` once
 | Tests | Vitest | pytest and hypothesis |
 | Naming | ls-lint, run once at the root for both languages | |
 | Hooks and commits | lefthook and commitlint at the root | |
+| Settings and logs | | pydantic-settings reads `RANGE_*` variables and fails at startup with the variable names. OpenTelemetry starts a span per request and reads the W3C `traceparent` header, and structlog writes JSON lines that carry its `trace_id`. |
+| Dependency updates | Dependabot opens weekly grouped pull requests with a seven day cooldown, and `just audit` runs `pnpm audit` and `uv audit` in CI. | |
 
 `just check` fans out lint, types, boundaries, naming, tests and a static build of the landing page across both languages in parallel. CI runs the same command with path filters and adds a step that regenerates the API client and fails on any diff. Agent tests use a scripted fake gateway for loop logic and recorded provider responses for contract tests, so the suite never depends on a live model. Paid eval runs are a separate, explicitly triggered job.
 

@@ -1,0 +1,43 @@
+version: 2
+
+# Versions are pinned exactly, so these updates are the only way a dependency moves.
+# The cooldown keeps a freshly published release out for a week, which gives the
+# community time to catch a compromised package.
+updates:
+  - package-ecosystem: npm
+    directories: ["/", "/apps/*", "/packages/*"]
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      javascript:
+        update-types: [minor, patch]
+    ignore:
+      # The root keeps TypeScript 6 for dependency-cruiser and openapi-typescript,
+      # which cannot run on the TypeScript 7 compiler yet. Move it by hand.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: uv
+    directory: "/"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      python:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        update-types: [minor, patch]
+
+  - package-ecosystem: docker-compose
+    directory: "/infra"
+    schedule:
+      interval: weekly

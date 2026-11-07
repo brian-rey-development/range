@@ -9,6 +9,8 @@ A poker thinking coach and a platform for learning how agent systems work. Read 
 - `just fix` applies safe autofixes.
 - `just contracts` regenerates `packages/api-client/openapi.json` and `src/schema.d.ts`. Never edit those files by hand.
 - `just up` and `just down` start and stop Postgres and Redis.
+- `just audit` checks both lockfiles for known vulnerabilities. CI runs it apart from `just check`, because it needs the network.
+- Settings live in `range_infrastructure.config` and read `RANGE_*` variables. `.env.example` lists them all, so add every new variable there. Log through `range_infrastructure.telemetry.get_logger` so each line carries the request `trace_id`.
 - Use `pnpm` for JavaScript and `uv` for Python, never npm, yarn or pip.
 
 ## Structure rules, all enforced by tooling
