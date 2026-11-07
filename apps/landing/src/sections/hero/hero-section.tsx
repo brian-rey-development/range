@@ -1,37 +1,31 @@
 import { ButtonLink } from "@range/ui";
 
-import { SITE } from "../../core/config/site";
 import { HERO } from "../../core/content/copy";
+import { ART } from "../../core/content/illustrations";
 import { Container } from "../../shared/container";
-import { TrainerPreview } from "./trainer-preview";
+import { Illustration } from "../../shared/illustration";
 
 function HeroCopy() {
   return (
-    <div className="flex flex-col items-start gap-6">
-      <h1 className="text-title-1 text-ink md:text-display">{HERO.title}</h1>
-      <p className="max-w-xl text-body text-ink-2">{HERO.body}</p>
-      <div className="flex flex-col items-start gap-2">
-        <ButtonLink
-          variant="primary"
-          size="lg"
-          href={SITE.githubUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {HERO.action}
-        </ButtonLink>
-        <p className="text-caption text-ink-3">{HERO.note}</p>
-      </div>
+    <div className="flex flex-col items-start gap-6 pb-10 md:pb-16">
+      <h1 className="text-hero text-ink">
+        <span className="block text-balance text-ink-2">{HERO.problem}</span>{" "}
+        <span className="block text-balance">{HERO.answer}</span>
+      </h1>
+      <p className="max-w-xl text-lead text-ink-2">{HERO.body}</p>
+      <ButtonLink variant="primary" size="lg" href="#play">
+        {HERO.action}
+      </ButtonLink>
     </div>
   );
 }
 
 export function HeroSection() {
   return (
-    <section className="border-b border-line py-12 md:py-16">
-      <Container className="grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+    <section className="bg-accent-soft pt-12 md:pt-16">
+      <Container className="grid items-end gap-8 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:gap-12">
         <HeroCopy />
-        <TrainerPreview />
+        <Illustration art={ART.king} priority className="ml-auto block h-auto w-full max-w-md" />
       </Container>
     </section>
   );

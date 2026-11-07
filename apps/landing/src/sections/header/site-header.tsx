@@ -1,9 +1,10 @@
-import { Button, ButtonLink, RangeLogo } from "@range/ui";
+import { Button, RangeLogo } from "@range/ui";
 import { useEffect, useState } from "react";
 
 import { SITE } from "../../core/config/site";
 import { NAVIGATION } from "../../core/content/copy";
 import { Container } from "../../shared/container";
+import { GitHubButton } from "../../shared/github-button";
 import { NavLinks } from "./nav-links";
 
 const MENU_ID = "mobile-menu";
@@ -29,7 +30,7 @@ export function SiteHeader() {
   useCloseOnEscape(open, close);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-surface">
+    <header data-theme="dark" className="sticky top-0 z-40 bg-surface">
       <a
         href="#main"
         className="focus-ring sr-only rounded-sm bg-surface-raised px-3 py-2 text-control focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
@@ -44,9 +45,9 @@ export function SiteHeader() {
           <NavLinks className="flex items-center gap-1" />
         </nav>
         <div className="ml-auto flex items-center gap-2">
-          <ButtonLink size="sm" href={SITE.githubUrl} target="_blank" rel="noreferrer">
+          <GitHubButton size="sm" href={SITE.githubUrl}>
             {NAVIGATION.github}
-          </ButtonLink>
+          </GitHubButton>
           <Button
             variant="ghost"
             size="sm"
@@ -60,7 +61,7 @@ export function SiteHeader() {
         </div>
       </Container>
       {open ? (
-        <nav id={MENU_ID} aria-label={NAVIGATION.label} className="border-t border-line md:hidden">
+        <nav id={MENU_ID} aria-label={NAVIGATION.label} className="md:hidden">
           <Container className="py-2">
             <NavLinks className="flex flex-col" onNavigate={close} />
           </Container>

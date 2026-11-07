@@ -1,13 +1,18 @@
 export const HERO = {
-  title: "Learn to think in poker, from first principles.",
-  body: "Range coaches each decision with exact pot odds and equity, then explains the why in one sentence. You see the numbers behind every call, so you can check the advice instead of trusting it.",
-  action: "View on GitHub",
-  note: "Range is in early development. Follow the build on GitHub.",
+  problem: "Charts tell you what to play.",
+  answer: "Range tells you why.",
+  action: "Try a hand",
+  body: "Lost a pot at midnight and not sure why? Range is the coach who is there at that hour. It explains each decision with exact numbers, reviews the hand afterward and remembers the mistakes you repeat.",
 } as const;
 
-export const TRAINER = {
-  title: "Turn decision",
-  badge: "Preview",
+export const PLAY = {
+  title: "Try one decision",
+  intro:
+    "You have a flush draw, villain is all in, and the call costs 4 bb. Choose, and Range grades it with the numbers behind the grade.",
+  street: "Flop",
+  hand: "Your hand",
+  prompt: "What do you do? Pick one, or press F or C.",
+  derivation: "Where the numbers come from",
 } as const;
 
 export const NAVIGATION = {
@@ -18,44 +23,32 @@ export const NAVIGATION = {
   closeMenu: "Close",
 } as const;
 
-export const COACH = {
-  title: "The coach shows its working",
-  intro:
-    "After each decision, Range says what it found and shows the numbers behind it. This is an example of the format.",
-  feedback:
-    "Folding here loses 0.90 bb. Your flush draw completes 35.0% of the time and the call needs 28.6%, so the price is right.",
-  method:
-    "Pot odds are 4 bb to call into 10 bb, so 4 ÷ 14. Nine hearts remain among 47 unseen cards, counted exactly over the turn and river. These are draw odds only, with no implied odds.",
-} as const;
-
-export const STRATEGY = {
-  title: "Strategy at a glance",
-  intro:
-    "The range grid colours each hand by how often it raises, calls or folds. The bar beside it states the same numbers, so colour is never the only signal.",
-  note: "These are sample frequencies for layout only, not a recommendation.",
-  hint: "Select a hand, or move with the arrow keys.",
-} as const;
-
-export const PRINCIPLES = {
-  title: "Built to be checked",
+export const HOW_IT_WORKS = {
+  title: "How Range coaches you",
   items: [
     {
-      title: "The engine does the arithmetic",
-      body: "Odds, equity and expected value come from a deterministic poker engine. The model explains, and it never calculates.",
+      title: "During the hand",
+      body: "The coach explains each decision with outs, pot odds and equity from a deterministic engine. Every number comes from the engine and shows its working.",
     },
     {
-      title: "Claims cite their source",
-      body: "Each number in the advice points to the tool result behind it, and anything the engine cannot verify is labeled as a heuristic.",
+      title: "After the hand",
+      body: "The coach reviews the whole hand with every card visible and grades each decision by what it cost. Short drills train one idea at a time.",
     },
     {
-      title: "Decisions, not people",
-      body: "Feedback judges the call you made. A mistake is a price you can learn from, and never a verdict on you.",
+      title: "Over time",
+      body: "Range remembers your pace, how you like things explained and the mistakes you repeat, and uses them in later advice.",
     },
   ],
   limit:
-    "At beginner level, correct means consistent with pot odds and equity against sensible ranges. Range does not claim to teach solver optimal play.",
+    "Range teaches the math you can do at the table. It does not teach solver play, so there is no solver jargon to learn.",
+} as const;
+
+export const CTA = {
+  title: "Follow the build",
+  body: "Range is in early development.",
+  action: "Follow on GitHub",
 } as const;
 
 export const FOOTER = {
-  action: "View source on GitHub",
+  action: "GitHub",
 } as const;

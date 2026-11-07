@@ -40,7 +40,9 @@ describe("SiteHeader", () => {
     await userEvent.click(screen.getByRole("button", { name: "Menu" }));
     const menu = screen.getAllByRole("navigation")[1];
     expect(menu).toBeDefined();
-    await userEvent.click(within(menu as HTMLElement).getByRole("link", { name: "Coach" }));
+    await userEvent.click(
+      within(menu as HTMLElement).getByRole("link", { name: NAV_LINKS[0].label }),
+    );
     expect(screen.getAllByRole("navigation")).toHaveLength(1);
   });
 });

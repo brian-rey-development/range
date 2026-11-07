@@ -1,0 +1,18 @@
+@import "@range/ui/styles.css";
+
+@theme static {
+  --text-hero: clamp(2.5rem, 1.6rem + 3.4vw, 3.75rem);
+  --text-hero--line-height: 1.04;
+  --text-hero--font-weight: 600;
+  --text-hero--letter-spacing: -0.04em;
+  --text-section: clamp(2rem, 1.6rem + 1.4vw, 2.5rem);
+  --text-section--line-height: 1.12;
+  --text-section--font-weight: 600;
+  --text-section--letter-spacing: -0.03em;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.6;
+  --text-copy: 1.0625rem;
+  --text-copy--line-height: 1.65;
+  --text-note: 0.875rem;
+  --text-note--line-height: 1.55;
+}

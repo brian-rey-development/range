@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Range",
-  title: "Range - learn poker from first principles",
+  title: "Range - your personal poker coach",
   description:
-    "Range coaches each poker decision with exact pot odds and equity, then explains the why in one sentence.",
+    "A personal poker coach that explains every decision with exact numbers, reviews each hand and remembers the mistakes you repeat.",
   githubUrl: "https://github.com/brian-rey-development/range",
 } as const;
