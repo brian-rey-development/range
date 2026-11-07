@@ -1,0 +1,11 @@
+extend = "../../ruff.toml"
+
+[lint.flake8-tidy-imports.banned-api]
+"pydantic".msg = "The engine uses the standard library only."
+"fastapi".msg = "The engine has no web dependency."
+"sqlalchemy".msg = "The engine has no database dependency."
+"redis".msg = "The engine has no queue dependency."
+"httpx".msg = "The engine performs no I/O."
+"litellm".msg = "The engine knows nothing about models."
+"anthropic".msg = "The engine knows nothing about models."
+"taskiq".msg = "The engine knows nothing about jobs."

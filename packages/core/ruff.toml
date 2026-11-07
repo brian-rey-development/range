@@ -1,0 +1,10 @@
+extend = "../../ruff.toml"
+
+[lint.flake8-tidy-imports.banned-api]
+"fastapi".msg = "Core has no web dependency."
+"sqlalchemy".msg = "Core has no database dependency. Define a port and implement it in infrastructure."
+"redis".msg = "Core has no queue dependency. Define a port and implement it in infrastructure."
+"httpx".msg = "Core performs no I/O. Define a port and implement it in infrastructure."
+"litellm".msg = "Core knows nothing about models. Define a port and implement it in infrastructure."
+"anthropic".msg = "Core knows nothing about models. Define a port and implement it in infrastructure."
+"taskiq".msg = "Core knows nothing about jobs."
