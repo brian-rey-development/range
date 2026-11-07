@@ -1,0 +1,11 @@
+@utility focus-ring {
+  @apply outline-none focus-visible:shadow-focus;
+}
+
+@utility dim-disabled {
+  @apply disabled:cursor-not-allowed disabled:opacity-45;
+}
+
+@utility figures {
+  @apply font-mono tabular-nums;
+}
